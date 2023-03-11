@@ -9,76 +9,120 @@ html {
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
   min-height: 100vh;
   width: 100%;
   background-color: #333;
   color: #eee;
 }
 
-details summary::-webkit-details-marker {
-  display: none;
-}
-
-details {
-  transition: all 1s ease-in-out;
-}
-
 .container {
   min-width: 280px;
-  width: 390px;
+  width: 100%;
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 10px;
-  border: 1px #fff solid;
+  padding: 2%;
+  border: 0.1rem #fff solid;
 }
 
 .mem-container {
-  height: 50px;
-  border-top: 2px solid #777;
+  min-height: 2.5rem;
+  border-top: 0.1rem solid #777;
   width: 100%;
-  padding: 10px;
-  overflow: hidden;
-}
-
-.mem-container[open] {
-  height: 300px;
+  padding: 1rem;
 }
 
 .option-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
-.option-title {
+.option-header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.option-header:focus > .icon {
+  transform: rotate(45deg);
+}
+
+.option-title {
+  font-style: italic;
+}
+
 .option-body {
-  height: 250px;
-  width: 100%;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #444;
+  width: 0%;
+  height: 0%;
+  margin: 0 auto;
+  transition: all 1s ease;
+}
+
+.option-header:focus ~ div {
+  margin: 1rem auto;
+  width: 50%;
+  height: auto;
 }
 
 .icon {
-  width: 24px;
-  height: 24px;
+  width: 1.4rem;
+  height: 1.4rem;
   background: url("./assets/images/icons/plus-solid.svg") no-repeat center;
   transition: transform 0.5s ease;
 }
 
-.mem-container[open] .icon {
-  width: 24px;
-  height: 24px;
-  transform: rotate(45deg);
+@media (min-width: 320px) {
+  .option-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 820px) {
+  .option-title {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .option-title {
+    font-size: 2.5rem;
+  }
+
+  .mem-container {
+    max-width: 1200px;
+  }
+
+  .icon {
+    opacity: 0;
+  }
+
+  .container {
+    max-width: 1200px;
+  }
+}
+
+@media screen and (hover: hover) {
+  .container:hover .icon {
+    opacity: 1;
+  }
+
+  .mem-container:hover {
+    cursor: pointer;
+  }
+
+  .option-header:hover ~ div,
+  .mem-container:hover .option-body,
+  .mem-container:focus .option-body {
+    margin: 1rem auto;
+    width: 50%;
+    height: auto;
+  }
+
+  .mem-container:hover .icon,
+  .option-header:focus > .icon {
+    transform: rotate(45deg);
+  }
 }
