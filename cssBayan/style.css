@@ -26,23 +26,38 @@ body {
 }
 
 .mem-container {
+  display: flex;
+  flex-direction: column-reverse;
   min-height: 2.5rem;
   border-top: 0.1rem solid #777;
   width: 100%;
   padding: 1rem;
 }
 
+.mem-container:active > .option-header .option-text {
+  color: #fff;
+}
+
+.mem-container:active .option-header .icon {
+  background: url("./assets/images/icons/plus-solid.svg") no-repeat center;
+}
+
+.mem-container:active .option-img {
+  opacity: 0.5;
+}
+
 .option-img {
-  width: 100%;
-  height: 100%;
+  width: 0%;
+  height: 0%;
   object-fit: contain;
+  transition: width 1s ease;
 }
 
 .option-header {
   width: 100%;
   min-height: 2rem;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -50,18 +65,13 @@ body {
   display: none;
 }
 
-/* .option-header:focus > .icon {
-  transform: rotate(45deg);
-} */
-
-.option-input:checked ~ label .icon {
+.option-input:checked ~ .option-header .icon {
+  background: url("./assets/images/icons/plus-solid-blue.svg") no-repeat center;
   transform: rotate(45deg);
 }
 
-.option-title {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+.option-input:checked ~ label .option-text {
+  color: #36c7ff;
 }
 
 .option-text {
@@ -69,23 +79,14 @@ body {
 }
 
 .option-body {
-  width: 0%;
-  height: 0%;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
   transition: all 1s ease;
 }
 
-/* .option-header:focus ~ div {
-  margin: 1rem auto;
-  width: 50%;
-  height: auto;
-} */
-
-.option-text {
-}
-
-.option-input:checked ~ .option-header .option-body {
-  margin: 1rem auto;
+.option-input:checked ~ .option-body .option-img {
   width: 50%;
   height: auto;
 }
@@ -102,23 +103,20 @@ body {
     max-width: 80%;
   }
 
-  .option-title {
+  .option-text {
     font-size: 1.5rem;
   }
 }
 
 @media (min-width: 820px) {
-  .option-title {
+  .option-text {
     font-size: 2rem;
   }
 }
 
 @media (min-width: 1200px) {
-  .option-title {
+  .option-text {
     font-size: 2.5rem;
-  }
-
-  .mem-container {
   }
 }
 
@@ -129,6 +127,11 @@ body {
 
   .container:hover .icon {
     opacity: 1;
+    background: url("./assets/images/icons/plus-solid-blue.svg") no-repeat;
+  }
+
+  .container:hover .option-text {
+    color: #36c7ff;
   }
 
   label {
@@ -139,16 +142,13 @@ body {
     cursor: pointer;
   }
 
-  .option-header:hover ~ div,
-  .mem-container:hover .option-body,
-  .mem-container:focus .option-body {
-    margin: 1rem auto;
+  .mem-container:hover .option-body .option-img {
     width: 50%;
     height: auto;
   }
 
   .option-header:hover .icon,
-  .option-header:focus > .icon {
+  .option-body:hover ~ .option-header .icon {
     transform: rotate(45deg);
   }
 }
